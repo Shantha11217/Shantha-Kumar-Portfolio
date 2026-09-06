@@ -5,368 +5,552 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Shantha Kumar Parameswaran — Renewable Energy Engineer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg: #F4F5F1;
+    --paper: #F9F9F7;
     --panel: #FFFFFF;
-    --ink: #10231C;
-    --ink-soft: #47564E;
-    --gold: #C98A1E;
-    --gold-deep: #9C6B12;
-    --teal: #0F6E5C;
-    --teal-deep: #0A4B3F;
-    --line: #DCE0D8;
-    --radius: 4px;
+    --ink: #1B1B1B;
+    --ink-soft: #585854;
+    --blue: #178A79;
+    --blue-dim: #E3EEEC;
+    --rule: #E2E0D8;
+    --red: #A63A2E;
+    --gold: #9C6B12;
+    --gold-deep: #7A530E;
+    --venture-bg: #FBF3E4;
+    --venture-line: #E8D8B4;
+    --teal: #B5651D;
+    --teal-deep: #8C4E16;
+    --teal-dim: #F4E9DA;
+    --sidebar-bg: #262624;
   }
   *{ box-sizing: border-box; }
   html{ scroll-behavior: smooth; }
   body{
-    margin:0;
-    background: var(--bg);
-    color: var(--ink);
-    font-family: 'IBM Plex Sans', sans-serif;
+    margin:0; background: var(--paper); color: var(--ink);
+    font-family: 'Source Serif 4', serif;
     line-height: 1.65;
     -webkit-font-smoothing: antialiased;
   }
-  a{ color: var(--teal-deep); }
-  a:focus-visible, button:focus-visible{ outline: 2px solid var(--gold); outline-offset: 3px; }
+  a{ color: var(--blue); }
+  a:focus-visible, button:focus-visible{ outline: 2px solid var(--blue); outline-offset: 3px; }
+  svg.icon{ width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+  h1,h2,h3,.mono,.nav a,.btn{ font-family: 'Archivo', sans-serif; }
 
-  .wrap{ max-width: 1000px; margin: 0 auto; padding: 0 28px; position: relative; }
+  .layout{ display:flex; min-height: 100vh; }
 
-  /* ---- signal line running down the page, single orchestrated device ---- */
-  .signal{
-    position: absolute;
-    left: 6px; top: 0; bottom: 0; width: 2px;
-    display: none;
+  /* ---------- sidebar ---------- */
+  .sidebar{
+    width: 280px; flex-shrink: 0;
+    background: var(--sidebar-bg); color: var(--paper);
+    padding: 40px 30px;
+    position: sticky; top:0; height: 100vh;
+    display:flex; flex-direction: column;
   }
-  @media (min-width: 900px){
-    .signal{ display:block; left: -2px; }
-    .wrap{ padding-left: 40px; }
+  .sb-name{ font-weight: 800; font-size: 1.3rem; line-height:1.25; margin: 0 0 4px; color: #FFFFFF; }
+  .sb-role{ font-size: 0.85rem; color: rgba(255,255,255,0.82); margin: 0 0 16px; }
+  .sb-stripe{
+    height: 7px; width: 58px; margin: 0 0 26px; border-radius: 2px;
+    background: repeating-linear-gradient(115deg, var(--teal) 0 8px, rgba(255,255,255,0.55) 8px 16px);
   }
-  .signal svg{ position: sticky; top: 0; height: 100vh; width: 40px; overflow: visible; }
-  .signal path{
-    fill:none; stroke: var(--teal); stroke-width: 2;
-    stroke-dasharray: 6 6;
-    opacity: 0.35;
+  .nav{ display:flex; flex-direction: column; gap: 2px; margin-bottom: auto; }
+  .nav a{
+    color: rgba(255,255,255,0.85); text-decoration:none; font-size: 0.82rem; font-weight: 600;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.16);
+    letter-spacing: 0.01em;
   }
+  .nav a:hover{ color: #fff; }
 
-  /* ---- hero ---- */
-  header.hero{ padding: 74px 0 50px; }
-  .kicker{
+  .stamp{
+    margin-top: 30px;
+    border: 1.5px solid rgba(255,255,255,0.75);
+    color: var(--paper);
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+    width: 92px; height: 92px;
+    display:flex; align-items:center; justify-content:center;
+    text-align:center;
     font-family:'IBM Plex Mono', monospace;
-    font-size: 0.78rem;
-    color: var(--teal-deep);
-    margin-bottom: 18px;
+    font-size: 0.62rem; font-weight: 500;
+    line-height: 1.3;
+    transform: rotate(-8deg);
   }
-  h1.value{
-    font-family:'Space Grotesk', sans-serif;
-    font-weight: 700;
-    font-size: clamp(2rem, 4.4vw, 3rem);
-    line-height: 1.18;
-    margin: 0 0 20px;
-    max-width: 15ch;
+
+  .sb-contact{ margin-top: 26px; display:flex; flex-direction: column; gap: 10px; }
+  .sb-contact a{
+    color: rgba(255,255,255,0.85); text-decoration:none; font-size: 0.8rem;
+    display:flex; align-items:center; gap: 8px;
   }
-  h1.value .accent{ color: var(--gold-deep); }
-  .hero-sub{
-    font-size: 1.08rem;
-    color: var(--ink-soft);
-    max-width: 56ch;
-    margin: 0 0 30px;
+  .sb-contact a:hover{ color: #fff; }
+
+  @media (max-width: 880px){
+    .layout{ flex-direction: column; }
+    .sidebar{ position: relative; width: 100%; height: auto; padding: 28px 24px; }
+    .nav{ flex-direction: row; flex-wrap: wrap; gap: 10px 16px; }
+    .nav a{ border-bottom:none; padding:0; }
+    .stamp{ display:none; }
+    .sb-stripe{ display:none; }
   }
-  .who{
-    font-size: 0.95rem;
-    color: var(--ink-soft);
-    margin-bottom: 30px;
+
+  /* ---------- main content ---------- */
+  main{ flex:1; min-width:0; padding: 0 0 80px; }
+  .sheet{ max-width: 780px; margin: 0 auto; padding: 0 34px; }
+
+  .case-ref{
+    font-family:'IBM Plex Mono', monospace; font-size: 0.72rem; color: var(--ink-soft);
+    padding: 20px 0 0;
   }
-  .who strong{ color: var(--ink); }
-  .cta-row{ display:flex; flex-wrap: wrap; gap: 12px; }
+
+  header.hero{ padding: 10px 0 50px; border-bottom: 1px solid var(--rule); }
+  h1.claim{
+    font-weight: 700; font-size: clamp(1.8rem, 3.4vw, 2.5rem);
+    line-height: 1.28; margin: 18px 0 22px; max-width: 22ch;
+  }
+  h1.claim em{ font-style: italic; font-family:'Source Serif 4', serif; font-weight: 600; color: var(--blue); }
+  .hero p.lede{ font-size: 1.08rem; color: var(--ink-soft); max-width: 60ch; margin: 0 0 22px; }
+
+  .value-box{
+    border-left: 3px solid var(--blue); background: var(--blue-dim);
+    padding: 16px 20px; margin: 0 0 28px; font-size: 0.95rem; color: var(--ink);
+  }
+  .value-box b{ font-family:'Archivo',sans-serif; }
+
+  .cta-row{ display:flex; gap: 12px; flex-wrap: wrap; }
   .btn{
-    font-family: 'IBM Plex Sans', sans-serif;
-    font-size: 0.94rem; font-weight: 600;
-    padding: 13px 22px;
-    border-radius: var(--radius);
-    text-decoration: none;
-    display: inline-block;
-    border: 1.5px solid transparent;
-    cursor: pointer;
+    font-size: 0.86rem; font-weight: 700; padding: 12px 20px;
+    text-decoration:none; display:inline-block; border-radius: 2px;
+    letter-spacing: 0.02em;
   }
-  .btn-primary{ background: var(--teal-deep); color: #fff; }
-  .btn-primary:hover{ background: var(--teal); }
-  .btn-outline{ border-color: var(--ink); color: var(--ink); }
-  .btn-outline:hover{ border-color: var(--gold-deep); color: var(--gold-deep); }
+  .btn-primary{ background: var(--ink); color: var(--paper); }
+  .btn-primary:hover{ background: var(--blue); }
+  .btn-outline{ border: 1.5px solid var(--ink); color: var(--ink); }
+  .btn-outline:hover{ border-color: var(--blue); color: var(--blue); }
 
-  /* ---- section shell ---- */
-  section{ padding: 56px 0; border-top: 1px solid var(--line); }
-  .eyebrow{
-    font-family:'IBM Plex Mono', monospace;
-    font-size: 0.76rem;
-    color: var(--teal-deep);
-    margin-bottom: 10px;
+  section{ padding: 46px 0; border-bottom: 1px solid var(--rule); }
+  .sec-label{
+    font-family:'IBM Plex Mono', monospace; font-size: 0.72rem; color: var(--blue);
+    text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px;
   }
-  h2{
-    font-family:'Space Grotesk', sans-serif;
-    font-size: 1.55rem;
-    font-weight: 600;
-    margin: 0 0 30px;
-    max-width: 32ch;
-  }
-  p{ color: var(--ink-soft); max-width: 66ch; }
+  h2{ font-weight: 700; font-size: 1.35rem; margin: 0 0 26px; max-width: 32ch; }
+  p{ color: var(--ink-soft); }
 
-  /* ---- value proposition cards ---- */
-  .value-grid{
-    display:grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 22px;
+  .clauses{ counter-reset: clause; }
+  .clause{
+    counter-increment: clause;
+    display:grid; grid-template-columns: 44px 1fr; gap: 16px;
+    padding: 22px 0; border-top: 1px solid var(--rule);
   }
-  @media (max-width: 780px){ .value-grid{ grid-template-columns: 1fr; } }
-  .value-card{
-    background: var(--panel);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    padding: 26px 22px;
+  .clause:first-child{ border-top: none; }
+  .clause::before{
+    content: counter(clause, decimal-leading-zero);
+    font-family:'IBM Plex Mono', monospace; font-size: 0.85rem;
+    color: var(--blue); padding-top: 3px;
   }
-  .value-card .mark{
-    width: 34px; height: 3px;
-    background: var(--gold-deep);
-    margin-bottom: 18px;
-  }
-  .value-card h3{
-    font-family:'Space Grotesk', sans-serif;
-    font-size: 1.08rem;
-    margin: 0 0 10px;
-    font-weight: 600;
-  }
-  .value-card p{ font-size: 0.93rem; margin: 0; }
-  .value-card .proof{
-    display:block;
-    margin-top: 14px;
-    font-family:'IBM Plex Mono', monospace;
-    font-size: 0.78rem;
-    color: var(--teal-deep);
+  .clause h3{ font-weight: 700; font-size: 1.05rem; margin: 0 0 6px; display:flex; align-items:center; gap:8px; }
+  .clause h3 svg.icon{ color: var(--blue); width:17px; height:17px; }
+  .clause p{ font-size: 0.95rem; margin: 0 0 8px; }
+  .clause .proof{
+    font-family:'IBM Plex Mono', monospace; font-size: 0.74rem; color: var(--ink);
+    background: var(--blue-dim); display:inline-block; padding: 3px 9px; border-radius: 2px;
   }
 
-  /* ---- proof metrics ---- */
-  .specs{
-    display:grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 18px;
+  .stat-strip{ display:flex; flex-wrap: wrap; gap: 34px; }
+  .stat b{
+    font-family:'Archivo', sans-serif; font-weight: 800; font-size: 2rem;
+    color: var(--ink); display:block;
   }
-  @media (max-width: 700px){ .specs{ grid-template-columns: repeat(2,1fr); } }
-  .spec .num{
-    font-family:'Space Grotesk', sans-serif;
-    font-size: 2.1rem; font-weight: 700;
-    color: var(--gold-deep);
-    display:block;
-    line-height:1;
-  }
-  .spec .lbl{ font-size: 0.82rem; color: var(--ink-soft); margin-top:6px; }
+  .stat span{ font-size: 0.8rem; color: var(--ink-soft); font-family:'IBM Plex Mono', monospace; }
 
-  /* ---- timeline ---- */
-  .timeline{ position: relative; padding-left: 28px; }
-  .timeline::before{ content:''; position:absolute; left:5px; top:6px; bottom:6px; width:1px; background: var(--line); }
-  .tl-item{ position: relative; padding-bottom: 34px; }
-  .tl-item:last-child{ padding-bottom: 0; }
-  .tl-item::before{
-    content:''; position:absolute; left:-28px; top:5px;
-    width:11px; height:11px; background: var(--bg);
-    border: 2.5px solid var(--teal-deep); border-radius: 50%;
+  /* experience with icon rail */
+  .entry{ display:grid; grid-template-columns: 40px 1fr; gap: 16px; padding: 24px 0; border-top: 1px solid var(--rule); }
+  .entry:first-child{ border-top: none; }
+  .entry-icon{
+    width:40px; height:40px; border-radius:50%; background:var(--blue-dim); color:var(--blue);
+    display:flex; align-items:center; justify-content:center; margin-top:2px;
   }
-  .tl-date{ font-family:'IBM Plex Mono', monospace; font-size: 0.78rem; color: var(--ink-soft); display:block; margin-bottom:4px; }
-  .tl-title{ font-family:'Space Grotesk', sans-serif; font-weight:600; font-size: 1.05rem; margin: 0 0 2px; }
-  .tl-org{ color: var(--ink-soft); font-size: 0.92rem; margin: 0 0 10px; }
-  .tl-item ul{ margin:0; padding-left: 18px; color: var(--ink-soft); font-size: 0.94rem; }
-  .tl-item li{ margin-bottom: 4px; }
+  .entry-head{ display:flex; justify-content: space-between; align-items:baseline; gap: 12px; flex-wrap: wrap; }
+  .entry-title{ font-weight: 700; font-size: 1.08rem; margin: 0; }
+  .entry-date{ font-family:'IBM Plex Mono', monospace; font-size: 0.76rem; color: var(--ink-soft); white-space: nowrap; }
+  .entry-org{ color: var(--ink-soft); font-size: 0.92rem; margin: 4px 0 12px; font-style: italic; }
+  .entry ul{ margin:0; padding-left: 20px; font-size: 0.94rem; color: var(--ink-soft); }
+  .entry li{ margin-bottom: 5px; }
 
-  /* ---- legend ---- */
-  .legend{ display:grid; gap: 0; }
-  .legend-row{
-    display:grid; grid-template-columns: 190px 1fr;
-    gap: 18px; padding: 15px 0; border-bottom: 1px solid var(--line);
-    align-items: baseline;
+  /* venture dossier — default (unused now, JomCUT uses .dossier.gold) */
+  .dossier{
+    background: var(--panel); border: 1.5px solid var(--ink); border-radius: 3px;
+    padding: 26px 26px 22px; position: relative; margin-top: 6px;
   }
-  .legend-key{ font-family:'Space Grotesk', sans-serif; font-weight:600; color: var(--teal-deep); font-size: 0.95rem; }
-  .legend-val{ color: var(--ink-soft); font-size: 0.92rem; }
-  @media (max-width: 640px){ .legend-row{ grid-template-columns: 1fr; gap:4px; } }
-
-  /* ---- credentials ---- */
-  .cert-list{ list-style:none; padding:0; margin:0; display:grid; gap:10px; }
-  .cert-list li{
-    padding: 13px 16px; background: var(--panel); border: 1px solid var(--line);
-    border-radius: var(--radius); color: var(--ink-soft); font-size: 0.92rem;
-    display:flex; justify-content: space-between; gap:10px; flex-wrap: wrap;
+  .dossier-tag{
+    position: absolute; top: -13px; left: 22px;
+    background: var(--blue); color: #fff;
+    font-family:'IBM Plex Mono', monospace; font-size: 0.68rem; font-weight: 500;
+    padding: 3px 10px; letter-spacing: 0.04em;
   }
-  .cert-list li span.tag{ font-family:'IBM Plex Mono', monospace; color: var(--teal-deep); font-size: 0.78rem; }
+  .dossier-stamp{
+    float: right;
+    border: 2px solid var(--red); color: var(--red);
+    border-radius: 50%; width: 70px; height:70px;
+    display:flex; align-items:center; justify-content:center; text-align:center;
+    font-family:'IBM Plex Mono', monospace; font-size: 0.58rem; font-weight:600;
+    transform: rotate(8deg); margin-left: 16px; margin-bottom: 8px;
+  }
+  .dossier h3{ font-weight: 700; font-size: 1.15rem; margin: 10px 0 4px; }
+  .dossier .entry-org{ margin-top: 0; }
 
-  /* ---- footer ---- */
-  footer{ padding: 64px 0 76px; border-top: 1px solid var(--line); }
-  footer h2{ margin-bottom: 14px; }
-  .contact-row{ display:flex; flex-wrap: wrap; gap: 22px; margin-top: 22px; font-size: 0.95rem; }
-  .contact-row a{ text-decoration:none; font-weight: 500; }
-  .contact-row a:hover{ text-decoration: underline; }
-  .fine{ margin-top: 36px; font-family:'IBM Plex Mono', monospace; font-size: 0.72rem; color: var(--ink-soft); }
+  /* JomCUT — cream/gold + teal venture-card palette */
+  .dossier.gold{
+    background: var(--venture-bg); border: 1.5px solid var(--venture-line); color: var(--ink-soft);
+  }
+  .dossier.gold .dossier-tag{ background: var(--gold-deep); color: #fff; }
+  .dossier.gold .dossier-stamp{ border-color: var(--teal); color: var(--teal-deep); background: rgba(20,107,95,0.07); }
+  .dossier.gold h3{ color: var(--ink); }
+  .dossier.gold h3 svg.icon{ color: var(--teal-deep); }
+  .dossier.gold .entry-org{ color: var(--ink-soft); }
+  .dossier.gold ul{ color: var(--ink-soft); }
+  .dossier.gold ul li::marker{ color: var(--teal); }
+  .stripe-accent{
+    height:12px; width:64px; margin-bottom:16px; border-radius:2px;
+    background: repeating-linear-gradient(115deg, var(--gold) 0 9px, var(--teal) 9px 18px);
+    border: 1px solid rgba(15,79,70,0.3);
+  }
+  .magic-badge{
+    display:inline-flex; align-items:center; gap:7px; margin-top:14px;
+    font-family:'IBM Plex Mono', monospace; font-size: 0.72rem; text-decoration:none;
+    color: var(--teal-deep); border: 1px solid var(--teal-deep); padding: 6px 11px; border-radius: 2px;
+  }
+  .magic-badge:hover{ background: var(--teal-dim); }
+
+  /* JomCUT app-icon illustration */
+  .dossier-body{ display:flex; gap: 22px; align-items:flex-start; justify-content:space-between; }
+  .dossier-copy{ flex:1; min-width: 0; }
+  .app-icons{ display:flex; gap:10px; flex-shrink:0; margin-top: 4px; }
+  .app-icons svg{ display:block; }
+  @media (max-width: 620px){ .dossier-body{ flex-direction: column; } .app-icons{ margin-top: 14px; } }
+
+  /* skills index table */
+  .index-table{ width: 100%; border-collapse: collapse; }
+  .index-table tr{ border-top: 1px solid var(--rule); }
+  .index-table tr:first-child{ border-top: none; }
+  .index-table td{ padding: 13px 0; vertical-align: top; font-size: 0.93rem; }
+  .index-table td.key{
+    font-family:'Archivo', sans-serif; font-weight: 700; color: var(--blue);
+    width: 190px; padding-right: 16px;
+  }
+  .index-table td.val{ color: var(--ink-soft); }
+  @media (max-width: 600px){
+    .index-table td.key{ display:block; width:auto; padding-bottom:2px; }
+    .index-table td.val{ display:block; padding-top:0; }
+    .index-table tr{ display:block; padding: 12px 0; }
+    .index-table td{ display:block; padding: 2px 0; }
+  }
+
+  /* credentials stamped list */
+  .cred-list{ list-style:none; margin:0; padding:0; }
+  .cred-list li{
+    display:flex; align-items:center; gap: 14px;
+    padding: 13px 0; border-top: 1px solid var(--rule); font-size: 0.93rem;
+  }
+  .cred-list li:first-child{ border-top: none; }
+  .cred-list .icon-wrap{ color: var(--blue); }
+  .cred-list .cred-text{ flex:1; color: var(--ink); }
+  .cred-list .cred-year{ font-family:'IBM Plex Mono', monospace; font-size: 0.76rem; color: var(--ink-soft); }
+
+  footer{ padding: 50px 0 0; }
+  footer h2{ margin-bottom: 12px; }
+  .fine{ margin-top: 30px; font-family:'IBM Plex Mono', monospace; font-size: 0.72rem; color: var(--ink-soft); }
 </style>
 </head>
 <body>
 
-<div class="signal" aria-hidden="true">
-  <svg viewBox="0 0 40 800" preserveAspectRatio="none">
-    <path d="M20,0 L20,120 L8,160 L20,200 L20,340 L32,380 L20,420 L20,560 L8,600 L20,640 L20,800"/>
-  </svg>
-</div>
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></symbol>
+    <symbol id="i-badge" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M8.5 13.5 7 22l5-3 5 3-1.5-8.5"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m3 6 9 7 9-7"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.5 1.5"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.5-1.5"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></symbol>
+    <symbol id="i-invoice" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="1.5"/><path d="M9 7h6M9 11h6M9 15h4"/></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24"><path d="M3 8l9-5 9 5-9 5-9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></symbol>
+    <symbol id="i-flask" viewBox="0 0 24 24"><path d="M9 2h6M10 2v6l-6 11a2 2 0 0 0 2 3h12a2 2 0 0 0 2-3l-6-11V2"/></symbol>
+    <symbol id="i-scissors" viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><path d="M20 4 8.5 15.5M20 20 8.5 8.5"/></symbol>
+    <symbol id="i-cap" viewBox="0 0 24 24"><path d="M2 9l10-5 10 5-10 5-10-5z"/><path d="M6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/></symbol>
+    <symbol id="i-droplet" viewBox="0 0 24 24"><path d="M12 2s7 8 7 13a7 7 0 0 1-14 0c0-5 7-13 7-13z"/></symbol>
+    <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M12 3v2.4M12 18.6V21M21 12h-2.4M5.4 12H3M18.1 5.9l-1.7 1.7M7.6 16.4l-1.7 1.7M18.1 18.1l-1.7-1.7M7.6 7.6 5.9 5.9"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V10M11 20V4M18 20v-7"/><path d="M2 20h20"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 2h9l5 5v15H6z"/><path d="M15 2v5h5"/><path d="M9 13h6M9 17h6"/></symbol>
+    <symbol id="i-rocket" viewBox="0 0 24 24"><path d="M12 2c3 2 5 6 5 10 0 2-1 4-2 5l-3 3-3-3c-1-1-2-3-2-5 0-4 2-8 5-10z"/><circle cx="12" cy="10" r="1.6"/><path d="M9 17l-2 4M15 17l2 4"/></symbol>
+    <symbol id="i-magnifier" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M20 20l-4.8-4.8"/></symbol>
+    <symbol id="i-cart" viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h3l2.6 12.6a2 2 0 0 0 2 1.6h8a2 2 0 0 0 2-1.6L21 7H6"/></symbol>
+  </defs>
+</svg>
 
-<div class="wrap">
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="i-phone-mock" viewBox="0 0 64 88">
+      <rect x="2" y="2" width="60" height="84" rx="10" fill="var(--gold)"/>
+      <rect x="10" y="12" width="30" height="4" rx="2" fill="rgba(255,255,255,0.85)"/>
+      <rect x="10" y="21" width="22" height="4" rx="2" fill="rgba(255,255,255,0.55)"/>
+      <circle cx="20" cy="42" r="7" fill="#fff"/>
+      <circle cx="38" cy="42" r="7" fill="#fff"/>
+      <rect x="14" y="56" width="36" height="7" rx="3.5" fill="rgba(255,255,255,0.85)"/>
+      <circle cx="32" cy="78" r="3" fill="rgba(255,255,255,0.7)"/>
+    </symbol>
+    <symbol id="i-card-mock" viewBox="0 0 64 74">
+      <rect x="2" y="2" width="60" height="70" rx="9" fill="none" stroke="var(--teal)" stroke-width="3"/>
+      <rect x="12" y="14" width="40" height="20" rx="4" fill="var(--teal-dim)"/>
+      <circle cx="21" cy="24" r="5" fill="var(--teal)"/>
+      <rect x="30" y="19" width="18" height="3.5" rx="1.7" fill="var(--teal)"/>
+      <rect x="30" y="26" width="14" height="3.5" rx="1.7" fill="rgba(20,107,95,0.4)"/>
+      <rect x="12" y="42" width="40" height="4" rx="2" fill="var(--teal-dim)"/>
+      <rect x="12" y="51" width="26" height="4" rx="2" fill="var(--teal-dim)"/>
+    </symbol>
+  </defs>
+</svg>
 
-  <header class="hero">
-    <div class="kicker">RENEWABLE ENERGY ENGINEER · DUBLIN, IRELAND</div>
-    <h1 class="value">I close the gap between good engineering and <span class="accent">projects that actually land on time.</span></h1>
-    <p class="hero-sub">Renewable energy projects rarely fail because of bad design — they slip because of undocumented changes, untracked data, and coordination that falls through the cracks. That's the part I own.</p>
-    <p class="who">MSc Sustainable Energy &amp; Green Technologies, University College Dublin · <strong>Member, Engineers Ireland (MIEI)</strong> · Delivered a 1.4 MWp solar EPC project end-to-end</p>
-    <div class="cta-row">
-      <a class="btn btn-primary" href="mailto:shanthak11@hotmail.com">Get in touch</a>
-      <a class="btn btn-outline" href="https://www.linkedin.com/in/shantha-kumar-parameswaran/" target="_blank" rel="noopener">View LinkedIn</a>
+<div class="layout">
+
+  <aside class="sidebar">
+    <p class="sb-name">Shantha Kumar<br>Parameswaran</p>
+    <p class="sb-role">Renewable Energy Engineer, MIEI</p>
+    <div class="sb-stripe" aria-hidden="true"></div>
+    <nav class="nav">
+      <a href="#value">01 — What I Bring</a>
+      <a href="#experience">02 — Experience</a>
+      <a href="#venture">03 — Founded a Startup</a>
+      <a href="#skills">04 — Technical Range</a>
+      <a href="#credentials">05 — Credentials</a>
+      <a href="#contact">06 — Contact</a>
+    </nav>
+    <div class="stamp">MIEI<br>VERIFIED<br>NO. 518487</div>
+    <div class="sb-contact">
+      <a href="mailto:shanthak11@hotmail.com"><svg class="icon"><use href="#i-mail"/></svg>shanthak11@hotmail.com</a>
+      <a href="https://www.linkedin.com/in/shantha-kumar-parameswaran/" target="_blank" rel="noopener"><svg class="icon"><use href="#i-link"/></svg>LinkedIn</a>
+      <a href="#" style="pointer-events:none"><svg class="icon"><use href="#i-pin"/></svg>Dublin, Ireland</a>
     </div>
-  </header>
+  </aside>
 
-  <section id="value">
-    <div class="eyebrow">WHAT I BRING</div>
-    <h2>Three things a project team stops worrying about once I'm on it</h2>
-    <div class="value-grid">
-      <div class="value-card">
-        <div class="mark"></div>
-        <h3>Documentation that survives an audit</h3>
-        <p>RFIs, as-builts, and closeout packs stay accurate and current, so inspections and handovers don't become fire drills.</p>
-        <span class="proof">PROOF — 1.4 MWp PETRONAS solar project, zero documentation-related delays</span>
-      </div>
-      <div class="value-card">
-        <div class="mark"></div>
-        <h3>Data that gets looked at, not just collected</h3>
-        <p>I turn scattered performance and financial data into reporting that management actually uses to make decisions.</p>
-        <span class="proof">PROOF — Ongoing performance tracking vs. design specification, delivered via structured dashboards</span>
-      </div>
-      <div class="value-card">
-        <div class="mark"></div>
-        <h3>Inefficiency I actually fix, not just flag</h3>
-        <p>When a process is wasting time, I redesign it — and follow through until the improvement is measurable.</p>
-        <span class="proof">PROOF — Centralised procurement workflow, ~25% cycle-time reduction</span>
-      </div>
-    </div>
-  </section>
+  <main>
+    <div class="sheet">
 
-  <section id="proof">
-    <div class="eyebrow">BY THE NUMBERS</div>
-    <div class="specs">
-      <div class="spec"><span class="num">1.4</span><span class="lbl">MWp solar project delivered</span></div>
-      <div class="spec"><span class="num">25%</span><span class="lbl">procurement cycle-time cut</span></div>
-      <div class="spec"><span class="num">3.38</span><span class="lbl">GPA, MSc UCD (Grade 1)</span></div>
-      <div class="spec"><span class="num">01</span><span class="lbl">CleanerGrid Challenge finalist</span></div>
-    </div>
-  </section>
+      <div class="case-ref">FILE NO. 2026-SKP-01 · LAST REVISED SEP 2026</div>
 
-  <section id="experience">
-    <div class="eyebrow">TRACK RECORD</div>
-    <h2>Experience</h2>
-    <div class="timeline">
+      <header class="hero">
+        <h1 class="claim">Good engineering still fails without <em>documentation, data, and delivery</em> that keep pace with it.</h1>
+        <p class="lede">I'm the person on a renewable energy project who makes sure none of those three slip — from a 1.4 MWp solar build to a startup I took from idea to paying customers.</p>
+        <div class="value-box">
+          <b>The value I bring:</b> a rare combination of EPC-grade documentation discipline and founder-level execution. I close gaps rather than just flag them, I turn raw data into decisions people act on, and I've already built and shipped a product end-to-end — not just delivered someone else's plan.
+        </div>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="mailto:shanthak11@hotmail.com">Get in touch</a>
+          <a class="btn btn-outline" href="https://www.linkedin.com/in/shantha-kumar-parameswaran/" target="_blank" rel="noopener">View LinkedIn</a>
+        </div>
+      </header>
 
-      <div class="tl-item">
-        <span class="tl-date">2023 — 2024</span>
-        <p class="tl-title">MSc, Sustainable Energy and Green Technologies</p>
-        <p class="tl-org">University College Dublin · GPA 3.38/4.0 (Second Class Honours, Grade 1)</p>
-        <ul>
-          <li>Built techno-economic models and peer-to-peer energy trading simulations for a thesis on microgrid-based local energy communities</li>
-          <li>Applied quantitative methods to evaluate distributed renewable energy system performance</li>
+      <section id="value">
+        <div class="sec-label">Section 01</div>
+        <h2>What I bring to a project team</h2>
+        <div class="clauses">
+          <div class="clause">
+            <div>
+              <h3><svg class="icon"><use href="#i-doc"/></svg>Documentation that holds up under inspection</h3>
+              <p>RFIs, as-builts, and closeout packs stay accurate and current — audits and handovers stop being fire drills.</p>
+              <span class="proof">1.4 MWp PETRONAS solar project — zero documentation delays</span>
+            </div>
+          </div>
+          <div class="clause">
+            <div>
+              <h3><svg class="icon"><use href="#i-chart"/></svg>Data that actually gets used</h3>
+              <p>I turn scattered performance and financial data into reporting that management uses to make real decisions.</p>
+              <span class="proof">Performance tracked vs. design spec, delivered via structured dashboards</span>
+            </div>
+          </div>
+          <div class="clause">
+            <div>
+              <h3><svg class="icon"><use href="#i-gear"/></svg>Inefficiency I fix, not just flag</h3>
+              <p>When a process is wasting time, I redesign it and follow through until the improvement is measurable.</p>
+              <span class="proof">Procurement workflow centralised — ~25% cycle-time cut</span>
+            </div>
+          </div>
+          <div class="clause">
+            <div>
+              <h3><svg class="icon"><use href="#i-rocket"/></svg>The instinct to build, not just execute</h3>
+              <p>I've taken an idea from a blank page to a live product with paying customers, not just delivered someone else's plan.</p>
+              <span class="proof">Co-founded &amp; launched JomCUT — 50–60 customer bookings, MaGIC-featured</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="proof-strip">
+        <div class="sec-label">By the numbers</div>
+        <div class="stat-strip">
+          <div class="stat"><b>1.4</b><span>MWp delivered</span></div>
+          <div class="stat"><b>25%</b><span>cycle-time cut</span></div>
+          <div class="stat"><b>3.38</b><span>GPA, MSc UCD</span></div>
+          <div class="stat"><b>50+</b><span>bookings, JomCUT</span></div>
+        </div>
+      </section>
+
+      <section id="experience">
+        <div class="sec-label">Section 02</div>
+        <h2>Experience</h2>
+
+        <div class="entry">
+          <div class="entry-icon"><svg class="icon"><use href="#i-cap"/></svg></div>
+          <div>
+            <div class="entry-head">
+              <p class="entry-title">MSc, Sustainable Energy and Green Technologies</p>
+              <span class="entry-date">2023 — 2024</span>
+            </div>
+            <p class="entry-org">University College Dublin · GPA 3.38/4.0 (Second Class Honours, Grade 1)</p>
+            <ul>
+              <li>Built techno-economic models and peer-to-peer energy trading simulations for a thesis on microgrid-based local energy communities</li>
+              <li>Applied quantitative methods to evaluate distributed renewable energy system performance</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="entry">
+          <div class="entry-icon"><svg class="icon"><use href="#i-sun"/></svg></div>
+          <div>
+            <div class="entry-head">
+              <p class="entry-title">Project Engineer</p>
+              <span class="entry-date">2022 — 2023</span>
+            </div>
+            <p class="entry-org">Micro Energy Holdings — 1.4 MWp PETRONAS Solar Energy Project, Malaysia</p>
+            <ul>
+              <li>Prepared and reviewed technical documentation, including as-built drawings and Requests for Inspection (RFIs)</li>
+              <li>Led project data and reporting, tracking performance against design specification using scheduling and data-visualisation tools</li>
+              <li>Coordinated subcontractors and vendors to keep delivery on schedule</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="entry">
+          <div class="entry-icon"><svg class="icon"><use href="#i-invoice"/></svg></div>
+          <div>
+            <div class="entry-head">
+              <p class="entry-title">Procurement Administrator (Contract)</p>
+              <span class="entry-date">2021 — 2022</span>
+            </div>
+            <p class="entry-org">BHP Group Limited, Malaysia</p>
+            <ul>
+              <li>Processed vendor invoices and maintained procurement records supporting audit and internal-control checks</li>
+              <li>Centralised fragmented procurement data into a single workflow, reducing cycle times by approximately 25%</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="entry">
+          <div class="entry-icon"><svg class="icon"><use href="#i-flask"/></svg></div>
+          <div>
+            <div class="entry-head">
+              <p class="entry-title">Research Assistant</p>
+              <span class="entry-date">2022</span>
+            </div>
+            <p class="entry-org">Monash University Malaysia</p>
+            <ul>
+              <li>Built an auction-based peer-to-peer energy trading model and ran distributed-resource simulations in Python</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="entry">
+          <div class="entry-icon"><svg class="icon"><use href="#i-box"/></svg></div>
+          <div>
+            <div class="entry-head">
+              <p class="entry-title">Warehouse Associate</p>
+              <span class="entry-date">2025 — Present</span>
+            </div>
+            <p class="entry-org">DPD Ireland, Dublin</p>
+            <ul>
+              <li>Processed high-volume parcels and supported loading/unloading against tight delivery deadlines</li>
+              <li>Maintained accurate inventory and organised stock areas — built rapid familiarity with the Irish logistics and warehouse-systems environment while settling into the market</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="entry">
+          <div class="entry-icon"><svg class="icon"><use href="#i-droplet"/></svg></div>
+          <div>
+            <div class="entry-head">
+              <p class="entry-title">BEng (Hons), Petroleum Engineering</p>
+              <span class="entry-date">2016 — 2020</span>
+            </div>
+            <p class="entry-org">Universiti Teknologi PETRONAS</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="venture">
+        <div class="sec-label">Section 03</div>
+        <h2>Before all that — I founded a startup</h2>
+        <div class="dossier gold">
+          <span class="dossier-tag">STARTUP · LAUNCHED · 2020</span>
+          <div class="dossier-stamp">LIVE<br>PRODUCT</div>
+          <div class="stripe-accent"></div>
+          <div class="dossier-body">
+            <div class="dossier-copy">
+              <h3><svg class="icon" style="vertical-align:-3px;margin-right:6px"><use href="#i-scissors"/></svg>Co-Founder &amp; CEO — JomCUT</h3>
+              <p class="entry-org">A cloud SaaS platform connecting freelance barbers &amp; stylists with customers for on-demand, doorstep grooming — built and launched in response to COVID-era salon restrictions in Malaysia.</p>
+              <ul>
+                <li>Launched a two-sided marketplace and personally onboarded barbers and stylists onto the platform, guiding vendor account setup</li>
+                <li>Grew the platform to 50–60 customer bookings for at-home grooming services</li>
+                <li>Led market-sizing analysis (TAM/SAM/SOM) and go-to-market strategy spanning paid media, social, and micro-influencer partnerships</li>
+              </ul>
+              <a class="magic-badge" href="https://central.mymagic.my/network/organization/8937/JomCut" target="_blank" rel="noopener">
+                <svg class="icon" style="width:14px;height:14px"><use href="#i-badge"/></svg>
+                Featured — Malaysian Global Innovation &amp; Creativity Centre (MaGIC)
+              </a>
+            </div>
+            <div class="app-icons" aria-hidden="true">
+              <svg width="58" height="80" viewBox="0 0 64 88"><use href="#i-phone-mock"/></svg>
+              <svg width="58" height="66" viewBox="0 0 64 74" style="margin-top:10px"><use href="#i-card-mock"/></svg>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="skills">
+        <div class="sec-label">Section 04</div>
+        <h2><svg class="icon" style="vertical-align:-3px;margin-right:8px;color:var(--blue)"><use href="#i-gear"/></svg>Technical range</h2>
+        <table class="index-table">
+          <tr><td class="key">Documentation</td><td class="val">RFI tracking, as-built and closeout documentation, compliance with industry standards</td></tr>
+          <tr><td class="key">Data &amp; reporting</td><td class="val">Scheduling and data-visualisation tools, quantitative modelling, Python</td></tr>
+          <tr><td class="key">Procurement</td><td class="val">Vendor and contractor coordination, cost tracking, records management</td></tr>
+          <tr><td class="key">Engineering tools</td><td class="val">AutoCAD, GIS, solar PV yield modelling and simulation (PVsyst/Helioscope)</td></tr>
+          <tr><td class="key">Reading drawings</td><td class="val">Single line electrical diagrams, technical and construction drawings</td></tr>
+          <tr><td class="key">Venture building</td><td class="val">Market sizing, go-to-market strategy, two-sided marketplace operations</td></tr>
+        </table>
+      </section>
+
+      <section id="credentials">
+        <div class="sec-label">Section 05</div>
+        <h2>Certifications &amp; recognition</h2>
+        <ul class="cred-list">
+          <li><span class="icon-wrap"><svg class="icon"><use href="#i-badge"/></svg></span><span class="cred-text">Member, Engineers Ireland (MIEI)</span><span class="cred-year">NO. 518487</span></li>
+          <li><span class="icon-wrap"><svg class="icon"><use href="#i-shield"/></svg></span><span class="cred-text">Irish Safe Pass — Solas certified</span><span class="cred-year">2026</span></li>
+          <li><span class="icon-wrap"><svg class="icon"><use href="#i-shield"/></svg></span><span class="cred-text">CIDB Green Card &amp; CSP Fire Watcher</span><span class="cred-year">SAFETY</span></li>
+          <li><span class="icon-wrap"><svg class="icon"><use href="#i-badge"/></svg></span><span class="cred-text">Finalist, RISE Universitas 21 &amp; CleanerGrid Challenge (EirGrid)</span><span class="cred-year">2024</span></li>
+          <li><span class="icon-wrap"><svg class="icon"><use href="#i-badge"/></svg></span><span class="cred-text">UCD Advantage Award</span><span class="cred-year">2024</span></li>
         </ul>
-      </div>
+      </section>
 
-      <div class="tl-item">
-        <span class="tl-date">2022 — 2023</span>
-        <p class="tl-title">Project Engineer</p>
-        <p class="tl-org">Micro Energy Holdings — 1.4 MWp PETRONAS Solar Energy Project, Malaysia</p>
-        <ul>
-          <li>Prepared and reviewed technical documentation, including as-built drawings and Requests for Inspection (RFIs)</li>
-          <li>Led project data and reporting, tracking performance against design specification using scheduling and data-visualisation tools</li>
-          <li>Coordinated subcontractors and vendors to keep delivery on schedule</li>
-        </ul>
-      </div>
-
-      <div class="tl-item">
-        <span class="tl-date">2021 — 2022</span>
-        <p class="tl-title">Procurement Administrator (Contract)</p>
-        <p class="tl-org">BHP Group Limited, Malaysia</p>
-        <ul>
-          <li>Processed vendor invoices and maintained procurement records supporting audit and internal-control checks</li>
-          <li>Centralised fragmented procurement data into a single workflow, reducing cycle times by approximately 25%</li>
-        </ul>
-      </div>
-
-      <div class="tl-item">
-        <span class="tl-date">2022</span>
-        <p class="tl-title">Research Assistant</p>
-        <p class="tl-org">Monash University Malaysia</p>
-        <ul>
-          <li>Built an auction-based peer-to-peer energy trading model and ran distributed-resource simulations in Python</li>
-        </ul>
-      </div>
-
-      <div class="tl-item">
-        <span class="tl-date">2016 — 2020</span>
-        <p class="tl-title">BEng (Hons), Petroleum Engineering</p>
-        <p class="tl-org">Universiti Teknologi PETRONAS</p>
-      </div>
+      <footer id="contact">
+        <div class="sec-label">Section 06</div>
+        <h2>Looking for a project engineer who closes gaps, not just finds them?</h2>
+        <p>Currently seeking project engineering or technical delivery roles in renewable energy across Ireland and Europe.</p>
+        <div class="cta-row" style="margin-top:20px">
+          <a class="btn btn-primary" href="mailto:shanthak11@hotmail.com">Email me</a>
+          <a class="btn btn-outline" href="https://www.linkedin.com/in/shantha-kumar-parameswaran/" target="_blank" rel="noopener">Connect on LinkedIn</a>
+        </div>
+        <div class="fine">Full right to work in Ireland — eligible for a Critical Skills Employment Permit (CSEP). Sponsorship required for roles elsewhere in the EU.</div>
+      </footer>
 
     </div>
-  </section>
-
-  <section id="skills">
-    <div class="eyebrow">TECHNICAL RANGE</div>
-    <h2>Where I add value day to day</h2>
-    <div class="legend">
-      <div class="legend-row">
-        <span class="legend-key">Documentation</span>
-        <span class="legend-val">RFI tracking, as-built and closeout documentation, compliance with industry standards</span>
-      </div>
-      <div class="legend-row">
-        <span class="legend-key">Data &amp; reporting</span>
-        <span class="legend-val">Scheduling and data-visualisation tools, quantitative modelling, Python</span>
-      </div>
-      <div class="legend-row">
-        <span class="legend-key">Procurement</span>
-        <span class="legend-val">Vendor and contractor coordination, cost tracking, records management</span>
-      </div>
-      <div class="legend-row">
-        <span class="legend-key">Engineering tools</span>
-        <span class="legend-val">AutoCAD, GIS, solar PV yield modelling and simulation</span>
-      </div>
-      <div class="legend-row">
-        <span class="legend-key">Reading drawings</span>
-        <span class="legend-val">Single line electrical diagrams, technical and construction drawings</span>
-      </div>
-    </div>
-  </section>
-
-  <section id="credentials">
-    <div class="eyebrow">CREDENTIALS</div>
-    <h2>Certifications &amp; recognition</h2>
-    <ul class="cert-list">
-      <li>Member, Engineers Ireland (MIEI) <span class="tag">NO. 518487</span></li>
-      <li>Irish Safe Pass — Solas certified <span class="tag">2026</span></li>
-      <li>CIDB Green Card &amp; CSP Fire Watcher <span class="tag">SAFETY</span></li>
-      <li>Finalist, RISE Universitas 21 &amp; CleanerGrid Challenge (EirGrid) <span class="tag">2024</span></li>
-      <li>UCD Advantage Award <span class="tag">2024</span></li>
-    </ul>
-  </section>
-
-  <footer id="contact">
-    <div class="eyebrow">LET'S TALK</div>
-    <h2>Looking for a project engineer who closes gaps, not just finds them?</h2>
-    <p>Currently seeking project engineering or technical delivery roles in renewable energy across Ireland and Europe.</p>
-    <div class="contact-row">
-      <a href="mailto:shanthak11@hotmail.com">shanthak11@hotmail.com</a>
-      <a href="https://www.linkedin.com/in/shantha-kumar-parameswaran/" target="_blank" rel="noopener">linkedin.com/in/shantha-kumar-parameswaran</a>
-      <span style="color:var(--ink-soft)">Dublin, Ireland</span>
-    </div>
-    <div class="fine">Full right to work in Ireland and the EU — no sponsorship required to start.</div>
-  </footer>
+  </main>
 
 </div>
 
